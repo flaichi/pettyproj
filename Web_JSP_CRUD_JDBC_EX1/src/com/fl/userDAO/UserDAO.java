@@ -63,7 +63,7 @@ public class UserDAO {
 		return result;
 	}
 	
-	public boolean  updateUSer(User user) throws SQLException {
+	public boolean  updateUser(User user) throws SQLException {
 		Connection conn = getConnection();
 		PreparedStatement stmt = conn.prepareStatement(UPDATE_USERS_SQL);
 		stmt.setString(1, user.getName());

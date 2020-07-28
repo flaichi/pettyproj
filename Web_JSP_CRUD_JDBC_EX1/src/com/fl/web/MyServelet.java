@@ -65,24 +65,49 @@ public class MyServelet extends HttpServlet {
 	}
 
 	
-private void updateuser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		
+	private void updateuser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		System.out.println("1  update method ...");
+		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println("2  Hi Update..");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+		System.out.println("3    Hi Update.2.");
+		User book = new User(id, name, email, country);
+		userDAO.updateUser(book);
+		response.sendRedirect("list");
 		 
 	}
 
-	private void editform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+	private void editform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		 System.out.println("editform method ...");
+		int id = Integer.parseInt(request.getParameter("id"));
+		User existingUser = userDAO.selectUser(id);
+		 System.out.println("editform method ...");
+		RequestDispatcher rd = request.getRequestDispatcher("edit-form.jsp");
+		request.setAttribute("user", existingUser);
+		System.out.println("editform method ...");
+		rd.forward(request, response);
+		System.out.println("editform method ...");
 	}
 
 	private void userform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+		RequestDispatcher rd = request.getRequestDispatcher("user-form.jsp");
+		rd.forward(request, response);
 		
 	}
 
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		 
-
+		 System.out.println("deleting User");
+	 
+		 int id=Integer.parseInt(request.getParameter("id"));	
+			if(userDAO.deleteUser(id)) {;
+			response.sendRedirect("list");
+			}
+			else {
+				System.out.println("erro in ndel user");
+			}
 	}
 
 	private void userList(HttpServletRequest request, HttpServletResponse response)
@@ -100,13 +125,19 @@ private void updateuser(HttpServletRequest request, HttpServletResponse response
 	}
 
 	private void userAdd(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		 
+		 System.out.println("adding user...");
+		 //int id=Integer.parseInt(request.getParameter(id));	
+		 	String name=request.getParameter("name");
+			String email = request.getParameter("email");
+			String country = request.getParameter("country");
+			User newUser = new User(name, email, country);
+			userDAO.insertUser(newUser);
+			response.sendRedirect("list");
 
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

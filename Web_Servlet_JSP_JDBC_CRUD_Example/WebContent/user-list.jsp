@@ -17,8 +17,8 @@
 	<div class="container">
 		<br />
 		<br />
-		<a href="<%=request.getContextPath()%>/userform" class="btn btn-success">Create New User</a><br/><br/>
-		<a href="<%=request.getContextPath()%>/userform" class="btn btn-logout">logout</a><br/><br/>
+		<a href="/userform" class="btn btn-success">Create New User</a><br/><br/>
+		<a href="/userform" class="btn btn-logout">logout</a><br/><br/>
 		<h3>Users List</h3> <br/>
 		<table class="table table-striped table-hover">
 			<thead>
