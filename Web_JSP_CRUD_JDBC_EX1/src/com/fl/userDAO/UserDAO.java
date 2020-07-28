@@ -15,7 +15,7 @@ public class UserDAO {
 	
 	
 	
-	private String jdbcURL = "jdbc:mysql://localhost:3306/sampledb?useSSL=false";
+	private String jdbcURL = "jdbc:mysql://localhost:3306/sampledb";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "farouk";
 	

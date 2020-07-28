@@ -2,7 +2,7 @@ package com.fl.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -87,6 +87,11 @@ private void updateuser(HttpServletRequest request, HttpServletResponse response
 
 	private void userList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, ClassNotFoundException {
+		
+		List<User> userList = userDAO.selectAllUser();
+		request.setAttribute("listUser", userList);
+		
+		System.out.println(userList);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("user-list.jsp");
 		rd.forward(request, response);
